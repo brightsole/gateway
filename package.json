@@ -1,5 +1,5 @@
 {
-  "name": "sst-federation-gateway",
+  "name": "gateway",
   "version": "0.0.0",
   "description": "gql fed gateway with sst microservice connection stitching",
   "keywords": [
@@ -9,7 +9,7 @@
     "lambda",
     "federation"
   ],
-  "repository": "git@github.com:brightsole/reuniclus-sst.git",
+  "repository": "git@github.com:brightsole/gateway.git",
   "author": "Drew Showalter <maelstroswim@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -34,6 +34,7 @@
   "dependencies": {
     "@apollo/gateway": "^2.11.3",
     "@apollo/server": "^5.0.0",
+    "@apollo/subgraph": "^2.11.3",
     "@as-integrations/aws-lambda": "^4.0.1",
     "envalid": "^8.1.0",
     "graphql": "^16.11.0",

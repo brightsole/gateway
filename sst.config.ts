@@ -3,20 +3,26 @@
 export default $config({
   app(input) {
     return {
-      name: 'federation-gateway',
+      name: 'gateway',
       removal: input?.stage === 'production' ? 'retain' : 'remove',
       protect: input?.stage === 'production',
       home: 'aws',
     };
   },
   async run() {
-    const api = new sst.aws.ApiGatewayV2('Api');
+    const api = new sst.aws.ApiGatewayV2('Gateway');
 
-    const itemsApiUrl = await aws.ssm.getParameter({
-      name: `/sst/items-service/${$app.stage}/api-url`,
+    const wordsApiUrl = await aws.ssm.getParameter({
+      name: `/sst/words-service/${$app.stage}/api-url`,
     });
-    const usersApiUrl = await aws.ssm.getParameter({
-      name: `/sst/users-service/${$app.stage}/api-url`,
+    const hopsApiUrl = await aws.ssm.getParameter({
+      name: `/sst/hops-service/${$app.stage}/api-url`,
+    });
+    const solvesApiUrl = await aws.ssm.getParameter({
+      name: `/sst/solves-service/${$app.stage}/api-url`,
+    });
+    const gamesApiUrl = await aws.ssm.getParameter({
+      name: `/sst/games-service/${$app.stage}/api-url`,
     });
 
     const functionConfig = {
@@ -31,10 +37,10 @@ export default $config({
         },
       },
       environment: {
-        // starter: solosis-sst used as items
-        ITEMS_SERVICE_URL: itemsApiUrl.value,
-        // starter: duosion-sst used as users/auth
-        USERS_SERVICE_URL: usersApiUrl.value,
+        WORDS_SERVICE_URL: wordsApiUrl.value,
+        HOPS_SERVICE_URL: hopsApiUrl.value,
+        SOLVES_SERVICE_URL: solvesApiUrl.value,
+        GAMES_SERVICE_URL: gamesApiUrl.value,
       },
     };
 
@@ -44,7 +50,7 @@ export default $config({
     });
 
     return {
-      apiUrl: api.url,
+      apiUrl: api.url.apply((url) => `${url}/graphql`),
     };
   },
 });

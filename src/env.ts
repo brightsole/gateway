@@ -7,13 +7,21 @@ const env = cleanEnv(process.env, {
     default: 'development',
   }),
   // Microservice URLs for federation
-  ITEMS_SERVICE_URL: url({
-    desc: 'Items microservice GraphQL endpoint URL',
+  WORDS_SERVICE_URL: url({
+    desc: 'Words microservice GraphQL endpoint URL',
     default: 'http://localhost:4001',
   }),
-  USERS_SERVICE_URL: url({
-    desc: 'Users microservice GraphQL endpoint URL',
+  HOPS_SERVICE_URL: url({
+    desc: 'Hops microservice GraphQL endpoint URL',
     default: 'http://localhost:4002',
+  }),
+  SOLVES_SERVICE_URL: url({
+    desc: 'Solves microservice GraphQL endpoint URL',
+    default: 'http://localhost:4003',
+  }),
+  GAMES_SERVICE_URL: url({
+    desc: 'Games microservice GraphQL endpoint URL',
+    default: 'http://localhost:4004',
   }),
   // Internal service authentication
   INTERNAL_SECRET_HEADER_NAME: str({
@@ -31,8 +39,10 @@ export default {
   region: env.AWS_REGION,
   isProduction: env.NODE_ENV === 'production',
   services: {
-    items: env.ITEMS_SERVICE_URL,
-    users: env.USERS_SERVICE_URL,
+    words: env.WORDS_SERVICE_URL,
+    hops: env.HOPS_SERVICE_URL,
+    solves: env.SOLVES_SERVICE_URL,
+    games: env.GAMES_SERVICE_URL,
   },
   internalAuth: {
     headerName: env.INTERNAL_SECRET_HEADER_NAME,
