@@ -10,7 +10,14 @@ export default $config({
     };
   },
   async run() {
-    const api = new sst.aws.ApiGatewayV2('Gateway');
+    const api = new sst.aws.ApiGatewayV2('Gateway', {
+      domain: {
+        name:
+          $app.stage === 'production'
+            ? 'api.jumpingbeen.com'
+            : `api-${$app.stage}.jumpingbeen.com`,
+      },
+    });
 
     const wordsApiUrl = await aws.ssm.getParameter({
       name: `/sst/words-service/${$app.stage}/api-url`,
