@@ -1,0 +1,46 @@
+{
+  "name": "sst-federation-gateway",
+  "version": "0.0.0",
+  "description": "gql fed gateway with sst microservice connection stitching",
+  "keywords": [
+    "package",
+    "sst",
+    "graphql",
+    "lambda",
+    "federation"
+  ],
+  "repository": "git@github.com:brightsole/reuniclus-sst.git",
+  "author": "Drew Showalter <maelstroswim@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "sst dev --stage preview",
+    "deploy": "sst deploy --stage preview",
+    "lint": "eslint --fix .",
+    "test": "tsc --noEmit && jest"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
+    "@types/jest": "^30.0.0",
+    "eslint": "^9.39.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "husky": "^9.1.7",
+    "jest": "^30.2.0",
+    "sst": "^3.17.21",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.2"
+  },
+  "dependencies": {
+    "@apollo/gateway": "^2.11.3",
+    "@apollo/server": "^5.0.0",
+    "@as-integrations/aws-lambda": "^4.0.1",
+    "envalid": "^8.1.0",
+    "graphql": "^16.11.0",
+    "graphql-scalars": "^1.25.0",
+    "graphql-tag": "^2.12.6"
+  },
+  "overrides": {
+    "@apollo/server-gateway-interface": "2.0.0"
+  }
+}
