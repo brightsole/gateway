@@ -17,6 +17,15 @@ export default $config({
             ? 'api.jumpingbeen.com'
             : `api-${$app.stage}.jumpingbeen.com`,
       },
+      cors: {
+        allowOrigins:
+          $app.stage === 'production'
+            ? ['https://jumpingbeen.com']
+            : [`https://${$app.stage}.jumpingbeen.com`],
+        allowMethods: ['GET', 'POST', 'OPTIONS'],
+        allowHeaders: ['content-type', 'x-user-id'],
+        allowCredentials: true,
+      },
     });
 
     const wordsApiUrl = await aws.ssm.getParameter({
