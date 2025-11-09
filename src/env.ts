@@ -6,6 +6,10 @@ const env = cleanEnv(process.env, {
     choices: ['development', 'test', 'production', 'staging'],
     default: 'development',
   }),
+  SST_STAGE: str({
+    desc: 'SST deployment stage',
+    default: 'preview',
+  }),
   // Microservice URLs for federation
   WORDS_SERVICE_URL: url({
     desc: 'Words microservice GraphQL endpoint URL',
@@ -38,6 +42,7 @@ const env = cleanEnv(process.env, {
 export default {
   region: env.AWS_REGION,
   isProduction: env.NODE_ENV === 'production',
+  stage: env.SST_STAGE,
   services: {
     words: env.WORDS_SERVICE_URL,
     hops: env.HOPS_SERVICE_URL,

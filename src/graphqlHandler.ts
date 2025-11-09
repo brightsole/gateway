@@ -4,6 +4,7 @@ import {
   handlers,
   startServerAndCreateLambdaHandler,
 } from '@as-integrations/aws-lambda';
+import corsMiddleware from './corsMiddleware';
 import createGateway from './gateway';
 import setContext from './setContext';
 
@@ -22,5 +23,6 @@ export const handler = startServerAndCreateLambdaHandler(
   handlers.createAPIGatewayProxyEventV2RequestHandler(),
   {
     context: setContext,
+    middleware: [corsMiddleware],
   },
 );
