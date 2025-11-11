@@ -13,5 +13,7 @@ export interface LambdaContextFunctionArgument {
 
 export type Context = {
   userId?: string;
+  attemptId?: string;
+  gameId?: string;
   event: GatewayEvent;
 };

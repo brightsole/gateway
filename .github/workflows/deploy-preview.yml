@@ -47,3 +47,6 @@ jobs:
 
       - name: Deploy SST stack
         run: npx sst deploy --stage $SST_STAGE
+        env:
+          INTERNAL_SECRET_HEADER_NAME: ${{ secrets.INTERNAL_SECRET_HEADER_NAME_TEST }}
+          INTERNAL_SECRET_HEADER_VALUE: ${{ secrets.INTERNAL_SECRET_HEADER_VALUE_TEST }}

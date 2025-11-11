@@ -20,9 +20,17 @@ export class AuthenticatedDataSource extends RemoteGraphQLDataSource {
         env.internalAuth.headerValue,
       );
 
-      // Forward the user id and let downstream services handle auth
+      // TODO: swap to a real userId when auth is implemented
+      // underlying services are high trust, but still do auth based on userId
       if (context?.userId) {
         request.http.headers.set('x-user-id', context.userId);
+      }
+
+      if (context?.gameId) {
+        request.http.headers.set('x-game-id', context.gameId);
+      }
+      if (context?.attemptId) {
+        request.http.headers.set('x-attempt-id', context.attemptId);
       }
     }
   }

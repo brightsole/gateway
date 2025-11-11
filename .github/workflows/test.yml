@@ -73,3 +73,6 @@ jobs:
 
       - name: Check SST diff
         run: npx sst diff --stage $SST_STAGE
+        env:
+          INTERNAL_SECRET_HEADER_NAME: ${{ secrets.INTERNAL_SECRET_HEADER_NAME_TEST }}
+          INTERNAL_SECRET_HEADER_VALUE: ${{ secrets.INTERNAL_SECRET_HEADER_VALUE_TEST }}

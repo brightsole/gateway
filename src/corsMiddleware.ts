@@ -21,7 +21,9 @@ const corsMiddleware: middleware.LambdaRequest<
         ...result.headers,
         'Access-Control-Allow-Origin': origin,
         'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-        'Access-Control-Allow-Headers': 'content-type',
+        // TODO: remove x-user-id when auth implemented
+        'Access-Control-Allow-Headers':
+          'content-type, x-user-id, x-game-id, x-attempt-id',
         'Access-Control-Allow-Credentials': 'true',
       };
 

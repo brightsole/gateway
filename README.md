@@ -45,6 +45,20 @@
         └─────►Datamuse api─────┘   └───────┘
 </pre>
 
+### Interesting things to know
+
+We run the entire stack as a DMZ. If you have a user id, you're assumed to be legit.
+
+Yes. This is stupid when we don't have an auth service to get that user id. But that won't be the case for long.
+
+Double stupid to do this when every single service has a publicly acessible internet address.
+
+The solution to that second point is [here.](https://github.com/brightsole/gateway/blob/main/src/authenticatedDataSource.ts#L18-L21)
+
+Our gateway talks to its children using a secret header name, and a secret header value, set in our github secrets [here](https://github.com/brightsole/gateway/blob/main/.github/workflows/deploy-preview.yml#L51-L52).
+
+That way an admin still has full access, but it's impossible for someone to crack. We don't tell you which field we're looking for, nor its value. I think it's relatively clever, and until anyone tells me otherwise, i'm going to assume it's completely secure... as soon as i set up rate limiting. The only thing it'll hurt is my (and the hackers) wallet otherwise.
+
 ## TODOS
 
 1. add actual auth

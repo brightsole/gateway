@@ -10,6 +10,27 @@ export default $config({
     };
   },
   async run() {
+    // Create internal auth secret for service-to-service communication
+    const internalAuthSecret = new aws.secretsmanager.Secret(
+      'InternalLockdownSecret',
+      {
+        name: `jumpingbeen/${$app.stage}/internal-lockdown`,
+        description: 'Internal service-to-service authentication secrets',
+      },
+    );
+
+    const internalAuthSecretVersion = new aws.secretsmanager.SecretVersion(
+      'InternalLockdownSecretVersion',
+      {
+        secretId: internalAuthSecret.id,
+        secretString: JSON.stringify({
+          INTERNAL_SECRET_HEADER_NAME: process.env.INTERNAL_SECRET_HEADER_NAME,
+          INTERNAL_SECRET_HEADER_VALUE:
+            process.env.INTERNAL_SECRET_HEADER_VALUE,
+        }),
+      },
+    );
+
     const api = new sst.aws.ApiGatewayV2('Gateway', {
       domain: {
         name:
@@ -32,6 +53,10 @@ export default $config({
       name: `/sst/games-service/${$app.stage}/api-url`,
     });
 
+    const authSecrets = internalAuthSecretVersion.secretString.apply((s) =>
+      JSON.parse(s!),
+    );
+
     const functionConfig = {
       runtime: 'nodejs22.x' as const,
       timeout: '30 seconds' as const,
@@ -48,6 +73,12 @@ export default $config({
         HOPS_SERVICE_URL: hopsApiUrl.value,
         SOLVES_SERVICE_URL: solvesApiUrl.value,
         GAMES_SERVICE_URL: gamesApiUrl.value,
+        INTERNAL_SECRET_HEADER_NAME: authSecrets.apply(
+          (s) => s.INTERNAL_SECRET_HEADER_NAME,
+        ),
+        INTERNAL_SECRET_HEADER_VALUE: authSecrets.apply(
+          (s) => s.INTERNAL_SECRET_HEADER_VALUE,
+        ),
       },
     };
 

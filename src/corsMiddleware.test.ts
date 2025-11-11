@@ -48,7 +48,8 @@ describe('corsMiddleware', () => {
       expect(result.headers).toEqual({
         'Access-Control-Allow-Origin': 'https://preview.jumpingbeen.com',
         'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-        'Access-Control-Allow-Headers': 'content-type',
+        'Access-Control-Allow-Headers':
+          'content-type, x-user-id, x-game-id, x-attempt-id',
         'Access-Control-Allow-Credentials': 'true',
       });
       expect(result.statusCode).toBe(200);
@@ -71,7 +72,8 @@ describe('corsMiddleware', () => {
       expect(result.headers).toEqual({
         'Access-Control-Allow-Origin': 'https://jumpingbeen.com',
         'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-        'Access-Control-Allow-Headers': 'content-type',
+        'Access-Control-Allow-Headers':
+          'content-type, x-user-id, x-game-id, x-attempt-id',
         'Access-Control-Allow-Credentials': 'true',
       });
 
@@ -94,7 +96,8 @@ describe('corsMiddleware', () => {
       expect(result.headers).toEqual({
         'Access-Control-Allow-Origin': 'https://preview.jumpingbeen.com',
         'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-        'Access-Control-Allow-Headers': 'content-type',
+        'Access-Control-Allow-Headers':
+          'content-type, x-user-id, x-game-id, x-attempt-id',
         'Access-Control-Allow-Credentials': 'true',
       });
     });
@@ -115,7 +118,8 @@ describe('corsMiddleware', () => {
         'x-custom-header': 'value',
         'Access-Control-Allow-Origin': 'https://preview.jumpingbeen.com',
         'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-        'Access-Control-Allow-Headers': 'content-type',
+        'Access-Control-Allow-Headers':
+          'content-type, x-user-id, x-game-id, x-attempt-id',
         'Access-Control-Allow-Credentials': 'true',
       });
     });
@@ -191,7 +195,8 @@ describe('corsMiddleware', () => {
       expect(result.headers).toEqual({
         'Access-Control-Allow-Origin': 'https://dev.jumpingbeen.com',
         'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-        'Access-Control-Allow-Headers': 'content-type',
+        'Access-Control-Allow-Headers':
+          'content-type, x-user-id, x-game-id, x-attempt-id',
         'Access-Control-Allow-Credentials': 'true',
       });
 
