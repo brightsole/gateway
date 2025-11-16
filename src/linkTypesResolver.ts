@@ -85,7 +85,9 @@ const isValidAssociationType = (key: string): key is ASSOCIATION_TYPES => {
   return isValid;
 };
 
-export const makeAssociationKeyReadable = (key: string): LinkType[] => {
+export const makeAssociationKeyReadable = (key?: string): LinkType[] => {
+  if (!key) return [];
+
   const associationKeys = key.split('|');
 
   return associationKeys.filter(isValidAssociationType).map((k) => ({

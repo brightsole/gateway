@@ -89,6 +89,13 @@ describe('linkTypesResolver', () => {
       expect(result.length).toBe(Object.values(ASSOCIATION_TYPES).length);
       expect(consoleErrorSpy).not.toHaveBeenCalled();
     });
+
+    it('should return empty array when associationsKey is undefined', () => {
+      const result = makeAssociationKeyReadable(undefined);
+
+      expect(result).toEqual([]);
+      expect(consoleErrorSpy).not.toHaveBeenCalled();
+    });
   });
 
   describe('resolvers', () => {
